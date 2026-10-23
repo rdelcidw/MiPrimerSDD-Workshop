@@ -29,7 +29,7 @@ Proyecto único estático (plan.md): `index.html`, `styles.css`, `package.json`,
 
 **Purpose**: Estructura inicial del proyecto
 
-- [ ] T001 Crear `package.json` en la raíz con `"type": "module"`, el script `"test": "node --test tests/"` y sin dependencias; crear las carpetas `src/` y `tests/`
+- [ ] T001 Crear `package.json` en la raíz con `"type": "module"`, el script `"test": "node --test"` (sin argumento: Node descubre `tests/*.test.js`; pasar el directorio falla en Node 24) y sin dependencias; crear las carpetas `src/` y `tests/`
 - [ ] T002 [P] Crear `index.html` con `<title>Curso-PSWE-07</title>`, meta viewport, `<link>` a `styles.css`, un contenedor `<main id="app">`, una región de avisos (`role="status"`), un `<dialog id="confirm-dialog">` vacío para la confirmación de eliminar y `<script type="module" src="src/app.js">`
 - [ ] T003 [P] Crear `styles.css` con la base visual: fondo claro, una sola familia sans-serif, un solo color de acento, color atenuado y color de advertencia con contraste WCAG 2.1 AA, `:focus-visible` visible, botones e inputs con mínimo 44×44 px, contenedor centrado con ancho máximo y sin scroll horizontal de 320 a 1440 px
 
@@ -45,7 +45,7 @@ Proyecto único estático (plan.md): `index.html`, `styles.css`, `package.json`,
 - [ ] T005 Implementar `src/storage.js` con `loadTasks(store)` y `saveTasks(store, tasks)` según contracts/data-logic.md (nunca lanzan; clave `curso-pswe-07.tasks.v1`) hasta que pase `tests/storage.test.js`
 - [ ] T006 [P] Escribir en `tests/tasks.test.js` las pruebas de `validateTitle(title)`: título vacío, solo espacios y con espacios alrededor ("recortar los espacios al inicio y al final; rechazar si queda vacío", FR-003)
 - [ ] T007 Crear `src/tasks.js` con `validateTitle(title)` devolviendo `{ valid, title }` con el título recortado, hasta que pasen las pruebas de T006
-- [ ] T008 Crear el esqueleto de `src/app.js`: estado en memoria según data-model.md (`tasks`, `filter = 'all'`, `view = 'list'`, `selectedId`, `formMode`, `notice`); resolver el `store` (`localStorage`, o uno de respaldo con `getItem` → `null` y `setItem` que lanza si acceder a `localStorage` lanza); cargar con `loadTasks` al iniciar y, si `status` es `'corrupt'`, fijar el aviso "Saved tasks could not be read."; función `render()` que despacha por `view` a funciones de pantalla (por ahora vacías) y muestra `notice`; función `commit(nextTasks, onSaved)` que aplica el protocolo de guardado (guardar con `saveTasks`; si `ok` adoptar `nextTasks` y llamar `onSaved`; si no, conservar `tasks`, no cambiar de pantalla y fijar el aviso "Could not save your changes." con `role="alert"`)
+- [ ] T008 Crear el esqueleto de `src/app.js`: estado en memoria según data-model.md (`tasks`, `filter = 'all'`, `view = 'list'`, `selectedId`, `formMode`, `notice`); resolver el `store` (`localStorage`, o uno de respaldo con `getItem` → `null` y `setItem` que lanza si acceder a `localStorage` lanza); cargar con `loadTasks` al iniciar y, si `status` es `'corrupt'`, fijar el aviso "Saved tasks could not be read."; función `render()` que despacha por `view` a funciones de pantalla (por ahora vacías) y muestra `notice`; función `commit(nextTasks, onSaved)` que aplica el protocolo de guardado (guardar con `saveTasks`; si `ok` adoptar `nextTasks` y llamar `onSaved`; si no, conservar `tasks`, no cambiar de pantalla y fijar el aviso "Could not save your changes." con `role="alert"`); el aviso se limpia (`notice = null`) en el siguiente guardado exitoso o al cambiar de pantalla
 
 **Checkpoint**: La base está lista; `npm test` pasa y las historias pueden empezar
 
@@ -64,7 +64,7 @@ Proyecto único estático (plan.md): `index.html`, `styles.css`, `package.json`,
 ### Implementation for User Story 1
 
 - [ ] T010 [US1] Implementar `createTask` y `orderForDisplay` en `src/tasks.js` (el `id` combina `Date.now()` en base 36 y un sufijo aleatorio; ver research.md R6) hasta que pasen las pruebas de T009
-- [ ] T011 [US1] Implementar en `src/app.js` la pantalla To-Do List: encabezado "Curso-PSWE-07" (FR-005), botón "Add task" (FR-009), filas con indicador de estado (texto "Pending"/"Done") y el título en una línea con elipsis (FR-007), usando `orderForDisplay`, y el estado vacío "No tasks yet" con invitación a agregar (FR-011)
+- [ ] T011 [US1] Implementar en `src/app.js` la pantalla To-Do List: encabezado "Curso-PSWE-07" (FR-005), botón "Add task" (FR-009), filas con indicador de estado (texto "Pending"/"Done") y el título en una línea con elipsis (FR-007), usando `orderForDisplay`, y el estado vacío "No tasks yet" con invitación a agregar (FR-011); el mensaje de filtro sin coincidencias se agrega en T032
 - [ ] T012 [US1] Implementar en `src/app.js` el formulario en modo agregar: campos Title y Description con etiquetas, botones Save y Cancel; Save valida con `validateTitle` y, si queda vacío, muestra "Title is required" junto al campo sin guardar; si es válido usa `createTask` + `commit` y vuelve a la lista; Cancel vuelve a la lista sin crear nada
 - [ ] T013 [P] [US1] Añadir en `styles.css` los estilos de la lista y el formulario: filas de al menos 44 px con título truncado con elipsis, botón "Add task" con el color de acento, encabezado, mensaje de validación asociado al campo, aviso y estado vacío
 - [ ] T014 [US1] Validar manualmente la historia con quickstart.md pasos 1, 2, 3, 8 y 9 (estado vacío, validación, persistencia, datos corruptos con aviso, fallo de guardado que revierte)
@@ -140,7 +140,7 @@ Proyecto único estático (plan.md): `index.html`, `styles.css`, `package.json`,
 
 **Goal**: Filtrar la lista por All, Pending o Done, conservando el filtro al volver del detalle (FR-010, FR-011)
 
-**Independent Test**: Con tareas Pending y Done, probar cada filtro y verificar el resaltado, la lista y el mensaje de filtro sin coincidencias (quickstart.md paso 7)
+**Independent Test** (requiere US2 para marcar tareas como hechas): Con tareas Pending y Done, probar cada filtro y verificar el resaltado, la lista y el mensaje de filtro sin coincidencias (quickstart.md paso 7)
 
 ### Tests for User Story 5
 
@@ -149,7 +149,7 @@ Proyecto único estático (plan.md): `index.html`, `styles.css`, `package.json`,
 ### Implementation for User Story 5
 
 - [ ] T031 [US5] Implementar `filterTasks` en `src/tasks.js` hasta que pasen las pruebas de T030
-- [ ] T032 [US5] Añadir en la pantalla To-Do List de `src/app.js` el filtro de tres botones All, Pending y Done: el activo con `aria-pressed="true"`, `state.filter` inicia siempre en `'all'` y no se persiste, la lista usa `filterTasks` antes de `orderForDisplay`, y el filtro se conserva al volver del detalle (Back, tras marcar estado o tras eliminar); mostrar "No tasks match this filter" cuando el filtro no tiene coincidencias y "No tasks yet" cuando no hay ninguna tarea
+- [ ] T032 [US5] Añadir en la pantalla To-Do List de `src/app.js` el filtro de tres botones All, Pending y Done: el activo con `aria-pressed="true"`, `state.filter` inicia siempre en `'all'` y no se persiste, la lista usa `filterTasks` antes de `orderForDisplay`, y el filtro se conserva al volver del detalle (Back, tras marcar estado o tras eliminar); mostrar "No tasks match this filter" cuando hay tareas pero el filtro no tiene coincidencias (el caso sin ninguna tarea sigue en "No tasks yet", T011)
 - [ ] T033 [P] [US5] Añadir en `styles.css` los estilos del filtro: botones de 44 px y opción activa resaltada con el color de acento y un indicador que no dependa solo del color
 - [ ] T034 [US5] Validar manualmente la historia con quickstart.md paso 7
 
@@ -165,7 +165,7 @@ Proyecto único estático (plan.md): `index.html`, `styles.css`, `package.json`,
 - [ ] T036 [P] Revisar el diseño responsivo (FR-023, SC-005) de 320 a 1440 px sin scroll horizontal, incluyendo títulos y descripciones largas, y corregir en `styles.css`
 - [ ] T037 [P] Verificar el alcance (Principio I, FR-024): comparar `index.html`, `src/` y `styles.css` con idea.md y confirmar que no hay cuentas, categorías, fechas límite, prioridades, búsqueda, sincronización ni llamadas de red
 - [ ] T038 Limpiar el código (Principio V): nombres descriptivos, funciones pequeñas, sin código muerto, comentado o duplicado, formato consistente en `src/`, `tests/`, `index.html` y `styles.css`
-- [ ] T039 Ejecutar la validación completa de quickstart.md: `npm test` en verde y los 10 pasos del recorrido manual con `npx serve .`
+- [ ] T039 Ejecutar la validación completa de quickstart.md: `npm test` en verde y los 10 pasos del recorrido manual con `npx serve .`; verificar además SC-001 (un usuario nuevo agrega su primera tarea en menos de 30 s sin instrucciones) y SC-003 (marcar una tarea como hecha requiere como máximo 2 interacciones desde la lista)
 
 ---
 
@@ -184,7 +184,7 @@ Proyecto único estático (plan.md): `index.html`, `styles.css`, `package.json`,
 - **US2 (P2)**: tras Foundational; el detalle se abre desde las filas de la lista de US1 (T011)
 - **US3 (P3)**: requiere el detalle y el formulario de US2 y US1 (T017, T012)
 - **US4 (P4)**: requiere el detalle de US2 (T017)
-- **US5 (P5)**: requiere la lista de US1 (T011); el filtro vigente se conserva al volver desde el detalle de US2
+- **US5 (P5)**: requiere la lista de US1 (T011) y el cambio de estado de US2 (T016, T017), porque validar los filtros Pending y Done necesita tareas hechas; el filtro vigente se conserva al volver desde el detalle de US2
 
 ### Within Each User Story
 

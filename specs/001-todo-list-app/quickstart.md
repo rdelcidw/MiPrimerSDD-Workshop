@@ -19,6 +19,9 @@ Los casos cubiertos están en [contracts/data-logic.md](contracts/data-logic.md)
 npx serve .
 ```
 
+Este es el único paso de arranque. La app usa módulos ES, así que no se abre con doble clic
+sobre `index.html`.
+
 Abrir la URL que imprime `serve` (normalmente http://localhost:3000).
 
 ## Recorrido manual (criterios de la spec)

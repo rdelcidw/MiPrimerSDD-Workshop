@@ -6,7 +6,8 @@ acento; una familia sans-serif; títulos más grandes y en negrita que descripci
 (FR-019, FR-020); controles nativos (`<button>`, `<input>`, `<textarea>`, `<dialog>`) con
 foco visible y etiqueta accesible; objetivos ≥ 44×44 px; contraste AA; sin scroll
 horizontal de 320 a 1440 px (FR-021 a FR-023). Avisos en un elemento con `role="status"`
-(o `role="alert"` para fallos de guardado).
+(o `role="alert"` para fallos de guardado). Un aviso se limpia en el siguiente guardado
+exitoso o al cambiar de pantalla.
 
 ## To-Do List
 
