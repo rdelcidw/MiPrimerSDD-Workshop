@@ -1,6 +1,6 @@
 # Implementation Plan: Lista de tareas Curso-PSWE-07
 
-**Branch**: `001-todo-list-app` | **Date**: 2026-10-22 | **Spec**: [spec.md](spec.md)
+**Branch**: `workshop/rdelcidw` | **Date**: 2026-10-22 | **Spec**: [spec.md](spec.md)
 
 **Input**: Feature specification from `/specs/001-todo-list-app/spec.md`
 
