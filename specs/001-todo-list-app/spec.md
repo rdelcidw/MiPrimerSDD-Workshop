@@ -25,6 +25,12 @@
 - Q: ¿A dónde va el usuario después de eliminar? → A: A la lista, con el filtro vigente.
 - Q: ¿Qué se muestra en el detalle si no hay descripción? → A: "No description" atenuado.
 - Supuestos A1 a A5 (sección Assumptions) confirmados por el usuario.
+- Q: Si los datos guardados están corruptos, ¿qué pasa con ellos y qué ve el usuario? → A: Se
+  muestra un aviso breve de que las tareas guardadas no se pudieron leer, junto con la lista
+  vacía; al siguiente guardado los datos ilegibles se reemplazan (sin respaldo).
+- Q: Si falla el guardado en el almacenamiento local, ¿qué pasa con el cambio recién hecho?
+  → A: Se revierte: la pantalla queda como estaba y se muestra un aviso de que no se pudo
+  guardar.
 
 ## User Scenarios & Testing *(mandatory)*
 
@@ -162,10 +168,13 @@ la lista muestra exactamente las tareas que corresponden y que el filtro activo 
 - Descripciones largas: en el detalle se muestran completas, ajustándose a varias líneas.
 - Lista vacía vs. filtro sin coincidencias: ambos casos muestran un mensaje amigable;
   el texto distingue si no hay tareas o si ninguna coincide con el filtro.
-- Almacenamiento local no disponible o lleno: la app debe informar al usuario con un
-  mensaje claro de que los cambios no se pudieron guardar, sin perder la sesión actual.
-- Datos guardados corruptos o ilegibles: la app abre igual, mostrando la lista vacía, en
-  lugar de quedar en blanco o fallar.
+- Almacenamiento local no disponible o lleno: si falla el guardado de un cambio (crear,
+  editar, cambiar estado o eliminar), el cambio se revierte, la pantalla queda como estaba
+  antes y se muestra un mensaje claro de que no se pudo guardar. La app sigue usable.
+- Datos guardados corruptos o ilegibles: la app abre igual, en lugar de quedar en blanco o
+  fallar, y muestra la lista vacía junto con un aviso breve (en inglés, como el resto de la
+  interfaz) de que las tareas guardadas no se pudieron leer. Al siguiente guardado, los
+  datos ilegibles se reemplazan; no se conserva respaldo.
 
 ## Requirements *(mandatory)*
 
