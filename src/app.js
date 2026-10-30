@@ -80,6 +80,20 @@ function selectedTask() {
 function showView(view, changes = {}) {
   Object.assign(state, { view, notice: null }, changes);
   render();
+  focusHeading();
+}
+
+// Re-rendering replaces the DOM, so keyboard users would lose their place;
+// moving focus to the new screen's heading announces the change.
+function focusHeading() {
+  const heading = appRoot.querySelector('h1');
+  heading.setAttribute('tabindex', '-1');
+  heading.focus();
+}
+
+function renderKeepingFocus(selector) {
+  render();
+  appRoot.querySelector(selector).focus();
 }
 
 // Adopts the new list only when it was saved, so the screen never shows a
@@ -130,9 +144,10 @@ function renderFilter() {
         type: 'button',
         class: 'filter-option',
         'aria-pressed': String(state.filter === id),
+        'data-filter': id,
         onClick: () => {
           state.filter = id;
-          render();
+          renderKeepingFocus(`[data-filter="${id}"]`);
         },
       },
       label,
@@ -166,10 +181,6 @@ function renderList() {
 
 function renderDetail() {
   const task = selectedTask();
-  if (!task) {
-    showView('list', { selectedId: null });
-    return h('section');
-  }
   const description = task.description
     ? h('p', { class: 'detail-description' }, task.description)
     : h('p', { class: 'detail-description detail-description--empty' }, MESSAGES.noDescription);
@@ -187,7 +198,11 @@ function renderDetail() {
       h('button', { type: 'button', onClick: () => showView('form', { formMode: 'edit' }) }, 'Edit'),
       h(
         'button',
-        { type: 'button', onClick: () => commit(toggleDone(state.tasks, task.id), render) },
+        {
+          id: 'toggle-done',
+          type: 'button',
+          onClick: () => commit(toggleDone(state.tasks, task.id), () => renderKeepingFocus('#toggle-done')),
+        },
         task.done ? 'Mark as not done' : 'Mark as done',
       ),
       h('button', { class: 'danger', type: 'button', onClick: () => askToDelete(task) }, 'Delete'),
@@ -207,7 +222,7 @@ function askToDelete(task) {
       'div',
       { class: 'actions' },
       h('button', { class: 'danger', type: 'button', onClick: confirmDelete }, 'Delete'),
-      h('button', { type: 'button', onClick: () => confirmDialog.close() }, 'Cancel'),
+      h('button', { type: 'button', autofocus: true, onClick: () => confirmDialog.close() }, 'Cancel'),
     ),
   );
   confirmDialog.showModal();
