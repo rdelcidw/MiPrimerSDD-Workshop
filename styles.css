@@ -93,16 +93,27 @@ button.primary {
   list-style: none;
 }
 
+.task-list li {
+  margin-bottom: 8px;
+}
+
 .task-row {
   display: flex;
   align-items: center;
   gap: 12px;
+  width: 100%;
   min-height: var(--target-size);
   padding: 8px var(--space);
-  margin-bottom: 8px;
+  text-align: left;
   border: 1px solid var(--border);
   border-radius: 8px;
   background: var(--surface);
+}
+
+.task-row--done .task-title {
+  color: var(--muted);
+  font-weight: 400;
+  text-decoration: line-through;
 }
 
 .task-title {
@@ -165,4 +176,71 @@ button.primary {
 
 #add-task {
   margin-bottom: var(--space);
+}
+
+.status--done {
+  border-color: var(--muted);
+  background: var(--muted);
+  color: var(--surface);
+}
+
+.back {
+  margin-bottom: var(--space);
+}
+
+.detail-title {
+  font-size: 2rem;
+  line-height: 1.25;
+}
+
+.detail-description {
+  margin: 0 0 var(--space);
+  font-size: 1rem;
+  white-space: pre-wrap;
+}
+
+.detail-description--empty {
+  color: var(--muted);
+}
+
+button.danger {
+  border-color: var(--warning);
+  background: var(--warning);
+  color: var(--warning-text);
+  font-weight: 600;
+}
+
+.filter {
+  display: flex;
+  gap: 8px;
+  margin-bottom: var(--space);
+}
+
+.filter-option {
+  flex: 1;
+}
+
+.filter-option[aria-pressed="true"] {
+  border: 2px solid var(--accent);
+  background: var(--accent);
+  color: var(--accent-text);
+  font-weight: 700;
+}
+
+dialog {
+  width: min(90vw, 420px);
+  padding: calc(var(--space) * 1.5);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  color: var(--text);
+}
+
+dialog::backdrop {
+  background: rgb(0 0 0 / 0.45);
+}
+
+dialog h2 {
+  margin: 0 0 var(--space);
+  font-size: 1.25rem;
 }
