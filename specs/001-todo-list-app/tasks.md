@@ -81,15 +81,15 @@ Proyecto único estático (plan.md): `index.html`, `styles.css`, `package.json`,
 
 ### Tests for User Story 2
 
-- [ ] T015 [P] [US2] Añadir en `tests/tasks.test.js` pruebas de `toggleDone(tasks, id)`: alterna `done` de false a true y de true a false, conserva el resto de los campos y la posición, no muta el original, y un `id` inexistente devuelve el mismo contenido
+- [X] T015 [P] [US2] Añadir en `tests/tasks.test.js` pruebas de `toggleDone(tasks, id)`: alterna `done` de false a true y de true a false, conserva el resto de los campos y la posición, no muta el original, y un `id` inexistente devuelve el mismo contenido
 
 ### Implementation for User Story 2
 
-- [ ] T016 [US2] Implementar `toggleDone` en `src/tasks.js` hasta que pasen las pruebas de T015
-- [ ] T017 [US2] Implementar en `src/app.js` la pantalla To-Do Detail: control Back que vuelve a la lista (FR-012), título completo y destacado, descripción debajo o "No description" atenuado si está vacía (FR-013), etiqueta de estado "Done"/"Pending" (FR-014), y botón "Mark as done"/"Mark as not done" cuya etiqueta depende del estado actual y que usa `toggleDone` + `commit` y permanece en el detalle (FR-015); hacer que tocar una fila de la lista abra el detalle (FR-008)
-- [ ] T018 [US2] Mostrar en las filas de la lista de `src/app.js` las tareas hechas con una clase de estado y el indicador "Done" (FR-007)
-- [ ] T019 [P] [US2] Añadir en `styles.css` los estilos del detalle (título grande y en negrita, descripción más pequeña, etiqueta de estado, botones de 44 px) y de las filas hechas (tachado + color atenuado, sin depender solo del color)
-- [ ] T020 [US2] Validar manualmente la historia con quickstart.md paso 4
+- [X] T016 [US2] Implementar `toggleDone` en `src/tasks.js` hasta que pasen las pruebas de T015
+- [X] T017 [US2] Implementar en `src/app.js` la pantalla To-Do Detail: control Back que vuelve a la lista (FR-012), título completo y destacado, descripción debajo o "No description" atenuado si está vacía (FR-013), etiqueta de estado "Done"/"Pending" (FR-014), y botón "Mark as done"/"Mark as not done" cuya etiqueta depende del estado actual y que usa `toggleDone` + `commit` y permanece en el detalle (FR-015); hacer que tocar una fila de la lista abra el detalle (FR-008)
+- [X] T018 [US2] Mostrar en las filas de la lista de `src/app.js` las tareas hechas con una clase de estado y el indicador "Done" (FR-007)
+- [X] T019 [P] [US2] Añadir en `styles.css` los estilos del detalle (título grande y en negrita, descripción más pequeña, etiqueta de estado, botones de 44 px) y de las filas hechas (tachado + color atenuado, sin depender solo del color)
+- [X] T020 [US2] Validar manualmente la historia con quickstart.md paso 4
 
 **Checkpoint**: US1 y US2 funcionan de forma independiente
 
@@ -103,13 +103,13 @@ Proyecto único estático (plan.md): `index.html`, `styles.css`, `package.json`,
 
 ### Tests for User Story 3
 
-- [ ] T021 [P] [US3] Añadir en `tests/tasks.test.js` pruebas de `updateTask(tasks, id, { title, description })`: actualiza título y descripción, recorta el título, conserva `id`, `done` y posición, no muta el original, rechaza título vacío con `{ ok: false, error: 'empty-title' }` y un `id` inexistente con `{ ok: false, error: 'not-found' }`
+- [X] T021 [P] [US3] Añadir en `tests/tasks.test.js` pruebas de `updateTask(tasks, id, { title, description })`: actualiza título y descripción, recorta el título, conserva `id`, `done` y posición, no muta el original, rechaza título vacío con `{ ok: false, error: 'empty-title' }` y un `id` inexistente con `{ ok: false, error: 'not-found' }`
 
 ### Implementation for User Story 3
 
-- [ ] T022 [US3] Implementar `updateTask` en `src/tasks.js` hasta que pasen las pruebas de T021
-- [ ] T023 [US3] Añadir en `src/app.js` el botón Edit en el detalle y el modo editar del formulario: reutiliza el formulario de agregar precargado con el título y la descripción actuales; Save valida con `validateTitle` (mensaje "Title is required"), usa `updateTask` + `commit` y vuelve al detalle con los datos nuevos; Cancel descarta siempre los cambios, sin preguntar, y vuelve al detalle sin modificar la tarea (FR-016)
-- [ ] T024 [US3] Validar manualmente la historia con quickstart.md paso 5
+- [X] T022 [US3] Implementar `updateTask` en `src/tasks.js` hasta que pasen las pruebas de T021
+- [X] T023 [US3] Añadir en `src/app.js` el botón Edit en el detalle y el modo editar del formulario: reutiliza el formulario de agregar precargado con el título y la descripción actuales; Save valida con `validateTitle` (mensaje "Title is required"), usa `updateTask` + `commit` y vuelve al detalle con los datos nuevos; Cancel descarta siempre los cambios, sin preguntar, y vuelve al detalle sin modificar la tarea (FR-016)
+- [X] T024 [US3] Validar manualmente la historia con quickstart.md paso 5
 
 **Checkpoint**: US1 a US3 funcionan de forma independiente
 
@@ -123,14 +123,14 @@ Proyecto único estático (plan.md): `index.html`, `styles.css`, `package.json`,
 
 ### Tests for User Story 4
 
-- [ ] T025 [P] [US4] Añadir en `tests/tasks.test.js` pruebas de `deleteTask(tasks, id)`: quita solo la tarea indicada, conserva el orden del resto, no muta el original y un `id` inexistente devuelve el mismo contenido
+- [X] T025 [P] [US4] Añadir en `tests/tasks.test.js` pruebas de `deleteTask(tasks, id)`: quita solo la tarea indicada, conserva el orden del resto, no muta el original y un `id` inexistente devuelve el mismo contenido
 
 ### Implementation for User Story 4
 
-- [ ] T026 [US4] Implementar `deleteTask` en `src/tasks.js` hasta que pasen las pruebas de T025
-- [ ] T027 [US4] Añadir en `src/app.js` el botón Delete en el detalle y el diálogo de confirmación con `<dialog id="confirm-dialog">` (modal): botones Delete (confirmar) y Cancel; confirmar usa `deleteTask` + `commit` y vuelve a la lista con el filtro vigente; cancelar cierra el diálogo y deja al usuario en el detalle sin eliminar nada (FR-017)
-- [ ] T028 [P] [US4] Añadir en `styles.css` el color de advertencia distinto para Delete y los estilos del diálogo (botones de 44 px, foco visible, contraste AA)
-- [ ] T029 [US4] Validar manualmente la historia con quickstart.md paso 6
+- [X] T026 [US4] Implementar `deleteTask` en `src/tasks.js` hasta que pasen las pruebas de T025
+- [X] T027 [US4] Añadir en `src/app.js` el botón Delete en el detalle y el diálogo de confirmación con `<dialog id="confirm-dialog">` (modal): botones Delete (confirmar) y Cancel; confirmar usa `deleteTask` + `commit` y vuelve a la lista con el filtro vigente; cancelar cierra el diálogo y deja al usuario en el detalle sin eliminar nada (FR-017)
+- [X] T028 [P] [US4] Añadir en `styles.css` el color de advertencia distinto para Delete y los estilos del diálogo (botones de 44 px, foco visible, contraste AA)
+- [X] T029 [US4] Validar manualmente la historia con quickstart.md paso 6
 
 **Checkpoint**: US1 a US4 funcionan de forma independiente
 
@@ -144,14 +144,14 @@ Proyecto único estático (plan.md): `index.html`, `styles.css`, `package.json`,
 
 ### Tests for User Story 5
 
-- [ ] T030 [P] [US5] Añadir en `tests/tasks.test.js` pruebas de `filterTasks(tasks, filter)`: `all` devuelve todas, `pending` solo las `done = false`, `done` solo las `done = true`, con tareas mezcladas, y devuelve arreglo vacío cuando no hay coincidencias
+- [X] T030 [P] [US5] Añadir en `tests/tasks.test.js` pruebas de `filterTasks(tasks, filter)`: `all` devuelve todas, `pending` solo las `done = false`, `done` solo las `done = true`, con tareas mezcladas, y devuelve arreglo vacío cuando no hay coincidencias
 
 ### Implementation for User Story 5
 
-- [ ] T031 [US5] Implementar `filterTasks` en `src/tasks.js` hasta que pasen las pruebas de T030
-- [ ] T032 [US5] Añadir en la pantalla To-Do List de `src/app.js` el filtro de tres botones All, Pending y Done: el activo con `aria-pressed="true"`, `state.filter` inicia siempre en `'all'` y no se persiste, la lista usa `filterTasks` antes de `orderForDisplay`, y el filtro se conserva al volver del detalle (Back, tras marcar estado o tras eliminar); mostrar "No tasks match this filter" cuando hay tareas pero el filtro no tiene coincidencias (el caso sin ninguna tarea sigue en "No tasks yet", T011)
-- [ ] T033 [P] [US5] Añadir en `styles.css` los estilos del filtro: botones de 44 px y opción activa resaltada con el color de acento y un indicador que no dependa solo del color
-- [ ] T034 [US5] Validar manualmente la historia con quickstart.md paso 7
+- [X] T031 [US5] Implementar `filterTasks` en `src/tasks.js` hasta que pasen las pruebas de T030
+- [X] T032 [US5] Añadir en la pantalla To-Do List de `src/app.js` el filtro de tres botones All, Pending y Done: el activo con `aria-pressed="true"`, `state.filter` inicia siempre en `'all'` y no se persiste, la lista usa `filterTasks` antes de `orderForDisplay`, y el filtro se conserva al volver del detalle (Back, tras marcar estado o tras eliminar); mostrar "No tasks match this filter" cuando hay tareas pero el filtro no tiene coincidencias (el caso sin ninguna tarea sigue en "No tasks yet", T011)
+- [X] T033 [P] [US5] Añadir en `styles.css` los estilos del filtro: botones de 44 px y opción activa resaltada con el color de acento y un indicador que no dependa solo del color
+- [X] T034 [US5] Validar manualmente la historia con quickstart.md paso 7
 
 **Checkpoint**: Las cinco historias funcionan de forma independiente
 
@@ -161,10 +161,10 @@ Proyecto único estático (plan.md): `index.html`, `styles.css`, `package.json`,
 
 **Purpose**: Verificaciones transversales de los Principios I, III y V
 
-- [ ] T035 Revisar accesibilidad (FR-021, FR-022, SC-004): operar todo con teclado, foco visible, etiquetas accesibles en campos y botones, estado no comunicado solo con color, y auditar con Lighthouse o axe (contraste AA y objetivos ≥ 44×44 px); corregir en `styles.css` y `src/app.js`
-- [ ] T036 [P] Revisar el diseño responsivo (FR-023, SC-005) de 320 a 1440 px sin scroll horizontal, incluyendo títulos y descripciones largas, y corregir en `styles.css`
-- [ ] T037 [P] Verificar el alcance (Principio I, FR-024): comparar `index.html`, `src/` y `styles.css` con idea.md y confirmar que no hay cuentas, categorías, fechas límite, prioridades, búsqueda, sincronización ni llamadas de red
-- [ ] T038 Limpiar el código (Principio V): nombres descriptivos, funciones pequeñas, sin código muerto, comentado o duplicado, formato consistente en `src/`, `tests/`, `index.html` y `styles.css`
+- [X] T035 Revisar accesibilidad (FR-021, FR-022, SC-004): operar todo con teclado, foco visible, etiquetas accesibles en campos y botones, estado no comunicado solo con color, y auditar con Lighthouse o axe (contraste AA y objetivos ≥ 44×44 px); corregir en `styles.css` y `src/app.js`
+- [X] T036 [P] Revisar el diseño responsivo (FR-023, SC-005) de 320 a 1440 px sin scroll horizontal, incluyendo títulos y descripciones largas, y corregir en `styles.css`
+- [X] T037 [P] Verificar el alcance (Principio I, FR-024): comparar `index.html`, `src/` y `styles.css` con idea.md y confirmar que no hay cuentas, categorías, fechas límite, prioridades, búsqueda, sincronización ni llamadas de red
+- [X] T038 Limpiar el código (Principio V): nombres descriptivos, funciones pequeñas, sin código muerto, comentado o duplicado, formato consistente en `src/`, `tests/`, `index.html` y `styles.css`
 - [ ] T039 Ejecutar la validación completa de quickstart.md: `npm test` en verde y los 10 pasos del recorrido manual con `npx serve .`; verificar además SC-001 (un usuario nuevo agrega su primera tarea en menos de 30 s sin instrucciones) y SC-003 (marcar una tarea como hecha requiere como máximo 2 interacciones desde la lista)
 
 ---
