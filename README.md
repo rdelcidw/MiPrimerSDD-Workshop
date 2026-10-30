@@ -37,3 +37,21 @@ No es necesario implementar la aplicación en este taller.
 - `requirements/`: especificación inicial.
 - `activities/`: guía de trabajo.
 - `deliverables/`: resultados de los estudiantes.
+
+## Entrega — Roberto Del Cid (rdelcidw)
+
+Aplicación de lista de tareas construida con el flujo SDD de GitHub Spec Kit, usando Claude Code como asistente.
+
+### Cómo ejecutarla
+1. `npx serve .`
+2. Abrir la URL que muestra (por ejemplo http://localhost:3000)
+
+### Pruebas
+`npm test`
+
+### Artefactos SDD
+- Constitución: `.specify/memory/constitution.md`
+- Especificación: `specs/001-todo-list-app/spec.md`
+- Plan: `specs/001-todo-list-app/plan.md`
+- Tareas: `specs/001-todo-list-app/tasks.md`
+- Hallazgos sobre la spec inicial: `deliverables/01-hallazgos.md`
